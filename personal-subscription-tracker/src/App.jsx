@@ -1,9 +1,14 @@
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function App() {
   //subscription data
-  const [subscriptions, setSubscriptions] = useState([
+  const [subscriptions, setSubscriptions] = useState(() => {
+  const savedSubscriptions = localStorage.getItem("subscriptions")
+
+  if (savedSubscriptions) {
+  const savedData = JSON.parse(savedSubscriptions)
+
+  const defaultSubscriptions = [
     {
       id: "1710000000000",
       name: "Netflix",
@@ -16,7 +21,36 @@ function App() {
       amount: 9.99,
       category: "Music",
     },
-  ])
+  ]
+
+  const savedIds = savedData.map((subscription) => subscription.id)
+
+  return [
+    ...savedData,
+    ...defaultSubscriptions.filter(
+      (subscription) => !savedIds.includes(subscription.id)
+    ),
+  ]
+}
+
+  return [
+    {
+      id: "1710000000000",
+      name: "Netflix",
+      amount: 15.99,
+      category: "Entertainment",
+    },
+    {
+      id: "1710000000001",
+      name: "Spotify",
+      amount: 9.99,
+      category: "Music",
+    },
+  ]
+})
+useEffect(() => {
+  localStorage.setItem("subscriptions", JSON.stringify(subscriptions))
+}, [subscriptions])
 
   //Form state
 const [name, setName] = useState("")
@@ -166,9 +200,15 @@ type="button"
 
 <button
 onClick={() => {
-setSubscriptions(
-  subscriptions.filter((item) => item.id !== subscription.id)
+  const confirmDelete = window.confirm(
+    "Do you want to delete this subscription?"
   )
+
+  if (confirmDelete) {
+    setSubscriptions(
+      subscriptions.filter((item) => item.id !== subscription.id)
+    )
+  }
 }}
 className="mt-3 rounded-lg bg-red-500 px-4 py-2 font-semibold text-white hover:bg-red-600"
 >
