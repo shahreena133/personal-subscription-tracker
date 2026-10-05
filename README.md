@@ -1,4 +1,4 @@
-# Personal Subscription Tracker
+-# Personal Subscription Tracker
 
 A simple React-based subscription tracker that helps users manage and keep track of their monthly subscriptions.
 
@@ -13,7 +13,6 @@ A simple React-based subscription tracker that helps users manage and keep track
 - Edit existing subscriptions
 - Delete subscriptions with confirmation
 - Calculate total monthly subscription cost
-- Save subscription data using Local Storage
 - Responsive two-column subscription layout
 
 ##  Technologies Used
@@ -22,7 +21,6 @@ A simple React-based subscription tracker that helps users manage and keep track
 - Tailwind CSS
 - JavaScript
 - Vite
-- Local Storage
 
 ## 📋 Subscription Details
 
